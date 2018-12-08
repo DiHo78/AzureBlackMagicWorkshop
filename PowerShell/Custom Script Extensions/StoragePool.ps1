@@ -72,14 +72,14 @@ Format-Volume ´
     -DriveLetter G `
     -FileSystem NTFS `
     -NewFileSystemLabel "Data" `
-    -AllocationUnitSize 65536  #64k alloc size - gut für SQL Server
+    -AllocationUnitSize 65536  #64k alloc size - SQL Server best practice in most cases
 
 #----------------------------------------------------------------------------
 # 3. Zweiten StoragePool anlegen
 #----------------------------------------------------------------------------
 $disks = Get-PhysicalDisk `
             -CanPool $true | Sort-Object `
-                                -Property PhysicalLocation |Select-Object `
+                                -Property PhysicalLocation | Select-Object `
                                                                 -First 2
 
 New-StoragePool `
@@ -109,4 +109,4 @@ Format-Volume `
     -DriveLetter H `
     -FileSystem NTFS `
     -NewFileSystemLabel "Log" `
-    -AllocationUnitSize 65536  #64k alloc size - gut für SQL Server
+    -AllocationUnitSize 65536  #64k alloc size - SQL Server best practice in most cases
